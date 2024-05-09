@@ -88,7 +88,7 @@ Crack the hash thm
 4. bcrypt $2*$, Blowfish (Unix) - Blew
 5. md4 - Eternity22
 ------------------------------------------
-1. SHA-256 - paule
+1. SHA-256 - paulehydra -l admin -P /usr/share/wordlists/rockyou.txt 10.10.10.43 http-post-form /department/login.php:”username=^USER^&password=^PASS^:Invalid Password!”
 2. NTML - n63umy8lkf4i
 
 =================================================================================================
@@ -98,8 +98,29 @@ TwoMillion HTB
 jtp gave answer:emerald
 3.
 
-
-
+=================================================================================================
+Valley thm
+1. scan nmap found 2 open ports 22 and 80
+2. gobuster found some directories, put into gobuster.txt
+3. found /gallery/note.txt and static/00
+4. go to /dev1243224123123 and found login page
+ #try comand hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.10.10.43 http-post-form /department/login.php:”username=^USER^&password=^PASS^:Invalid Password!”
+5. try sqlmap -u http://10.10.202.11/dev1243224123123/ --forms --batch --crawl=10 --level=5 --risk=3 - ничего
+6. Открыл подсказку, при вводе логина и пароля не обновляется страница, значит креды зашиты на стороне клиента
+-  а это плохо, обычно креды обрабатывает серверная часть.
+7. http://10.10.202.11/dev1243224123123/dev.js и видим логин и парольной
+8. siemDev:california на страницу логина
+9. Нашел еще заметки, где говорится о том, что есть ftp сервак с теми же кредами, но не понятно какой порт
+10. Просканим все порты через nmap, подождем
+- nmap -T5 -p- 10.10.202.11 > nmap_all_port.report
+11. ftp 10.10.202.11 37370 и теже креды что нашел выше
+12. скачал три файла с раширением pcapng
+13. юзаем wireshark через gnu
+14. делаем экспорт из третьего файла http list objects и находим aplication/x-www-form, сохраняем index.html
+15. cat index.html и видим креды uname=valleyDev&psw=ph0t0s1234
+16. логинимся через ssh и креды из п.15
+17. берем флаг юзера
+18. эскалируем до рута
 
 
 
