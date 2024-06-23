@@ -171,8 +171,9 @@ Usage htb
 
 1. Done simple scan of directories and ports
 2. Found registration page
-3. Found hidden token on the page 'Vn84QFPqnnxZ66KTuvu5ENm2Bq9lajdWCfnp9W7r'
+3. Found hidden token on the reset password page 'Vn84QFPqnnxZ66KTuvu5ENm2Bq9lajdWCfnp9W7r'
 4. Try use it with burp
+
 
 ==============================================================================================================
 
@@ -211,3 +212,34 @@ Lab: Offline password cracking
 6. Удаляем carlos
 
 ============================================================================================
+
+BreakOut Empire||Vuln Hub
+
+1. скан портов, smb, enum4linux нашел user:cyber
+2. Далее на стартовой странице Apache в sourse code нашел странный зашифрованный пароль на Brainfuck languages
+3. Расшифровка и пароль есть cyber:.2uqPEfj3D<P'a-3.
+'4. с помощью подсказок нашел бэкап в папке /var/backups/.old_pass.bak
+5. ./tar -cvf old_pass /var/backups/.old_pass.bak потом cat и получаем пароль root:Ts&4&YurgtRX(=~h.
+
+
+==============================================================================================
+
+Jangow Vuln Hub
+
+1. Portscan with nmap, found 21 and 80
+2. dirsearch, for scan directories and found ://host/site/wordpress/config.php - very usefool tool
+3. found message on the page "Connection failed: Access denied for user 'desafio02'@'localhost' (using password: YES)"
+4. I have username maybe) desafio02
+5. Lets try brute-forse with hydra - nothing
+6. found CLI "http://10.0.2.8/site/busque.php?buscar=some_comands"
+7. Try some comands and found .backup file in "http://10.0.2.8/site/busque.php?buscar=cat%20/var/www/html/.backup"
+8. In this file found creds for "jangow01:abygurl69"
+9. Try to get access on ftp server - success!
+10. Nothing get, only some files
+11. Enter through vm into machine, check "uname -a"
+12. Then I compiled the exploit using gcc command, exploit_db, compile in home dir and so one.
+13. after i got root and download "proof.txt"
+
+==============================================================================================
+
+
